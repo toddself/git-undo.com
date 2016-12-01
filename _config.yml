@@ -1,7 +1,7 @@
 ### your site title here
 
 title: Webjeda Hagura
-baseurl: git-undo.com # name of the repository
+baseurl: / # name of the repository
 
 highlighter: rouge
 markdown: kramdown
