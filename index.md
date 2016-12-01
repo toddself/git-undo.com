@@ -64,5 +64,54 @@ So now we have our conflicting commit as the second commit in the branch and are
 
 If anyone works in anything similar to git flow (although I would argue git flow is way more complex than you likely need), you’ve had the point hammered into your head that you should never work on master (or develop. Or whatever branch it is.) But, like, hey, we’re all human.
 
-### If your changes are staged, but not committed
+### If your changes are staged<sup>[1](#1)</sup>, but not committed<span id="1-source"></span>
+This one is the easy one! Make a new branch and check it out, then commit your changes!
 
+```
+git branch [branchname]
+git checkout [branchname]
+```
+
+(or do both commmands at the same time with `git checkout -b [branchname])
+
+### If your changes are committed, but not pushed<span id="2-source"></span>
+1. Checkout the branch you committed to by mistake
+2. Using git log find the commit before all the stuff you added, and copy it's hash.
+3. `git reset [commit hash]`<sup>[2](#hash-and-head^)</sup>
+4. `git checkout -b [new branch name]`
+5. `git add . && git commit`
+ 
+`git reset [commit hash]` will place the `HEAD` pointer (which tells git what the last commit in a branch was) at this commit.  Anything _after_ that commit in the log, is no longer part of this branch, and will be unstaged. This makes it so all your changes are just now uncommitted work on that branch.  You checkout a new branch, add the files back to staging and then commit them to your new branch.
+
+#### If your changes are committed and pushed
+Sorry, bub. You really shouldn't ever edit remote repository history on shared branches, as this will cause everyone to have a very sad day. You're just going to have to take yyour lumps on this one. 
+
+Why?
+
+Because if someone has pulled down your changes locally and starts working on a new branch based on that version, and then you remove those commits from the branch, their local branch copy will no longer jive with the history on the remote branch. (But, yes! That can be fixed as well! However! Don't force people to do it!)
+
+#### 1
+_Wait.  What the fuck is "staged, but not committed?"_
+
+When you're using git and you are `git add`ing files (If you're using `git commit -a` that is telling git to automatically add all changed files, so you're implicitly `git add`ing there as well!), you are actually moving them into what's called `staging`.  This is a list of files, at the specific version when you added them, that you are going to commit.
+
+[🔙](#1-source)
+
+#### 2
+_I've seen a lot of git commands use `HEAD~[some number]` or even more esoteric shit like `HEAD^^`. What the shit is that?_
+
+Those are all short-hand for specific commits.  `HEAD~[some number]` means [some number] commits before the commit that `HEAD` is pointed at.
+
+```
++---------+
+| 23dae4a | <- HEAD
++---------+
+| ff092aa |
++---------+
+| 452a55a |
++---------+
+```
+
+In the example above, `HEAD~1` is the commit with the hash `ff092aa`.  `HEAD~2` is `452a55a`.  `HEAD^` is an even lazier way to type `HEAD~1`.  `HEAD^^` is `HEAD~2`.
+
+[🔙](#2-source)
