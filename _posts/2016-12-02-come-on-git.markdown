@@ -19,7 +19,7 @@ hint: (e.g., ‘git pull …’) before pushing again.
 hint: See the ‘Note about fast-forwards’ in ‘git push — help’ for details.
 ```
 
-Then you do a git pull origin master but you end up with a merge conflict or two. Or it creates a merge commit and you were told merge commits aren’t good. Or you follow the above message like a good developer and then you get:
+Then you do a git pull origin master but you end up with a merge conflict or two. Or it creates a merge commit and you were told merge commits aren’t good. Or you follow the above message like a good developer and then you get
 
 ```
 ↳ git pull origin master
@@ -63,3 +63,6 @@ So now we have our conflicting commit as the second commit in the branch and are
 ## Commit to the wrong branch
 
 If anyone works in anything similar to git flow (although I would argue git flow is way more complex than you likely need), you’ve had the point hammered into your head that you should never work on master (or develop. Or whatever branch it is.) But, like, hey, we’re all human.
+
+### If your changes are staged, but not committed
+
