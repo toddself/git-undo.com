@@ -84,7 +84,7 @@ git checkout [branchname]
 `git reset [commit hash]` will place the `HEAD` pointer (which tells git what the last commit in a branch was) at this commit.  Anything _after_ that commit in the log, is no longer part of this branch, and will be unstaged. This makes it so all your changes are just now uncommitted work on that branch.  You checkout a new branch, add the files back to staging and then commit them to your new branch.
 
 #### If your changes are committed and pushed
-Sorry, bub. You really shouldn't ever edit remote repository history on shared branches, as this will cause everyone to have a very sad day. You're just going to have to take yyour lumps on this one. 
+Sorry, bub. You really shouldn't ever edit remote repository history on shared branches, as this will cause everyone to have a very sad day. You're just going to have to take your lumps on this one. 
 
 Why?
 
