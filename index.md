@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Come on, git"
-date:   2016-12-02 09:00:00 -0800
+date:   2016-12-05 09:17:00 -0800
 ---
 Git is probably the biggest common-among-developers-of-all-languages programs that we encounter on a daily basis outside of our terminals, yet many of us use it in a very straight forward manner and hope we don’t ever run into issues with it.
 
@@ -83,7 +83,18 @@ git checkout [branchname]
  
 `git reset [commit hash]` will place the `HEAD` pointer (which tells git what the last commit in a branch was) at this commit.  Anything _after_ that commit in the log, is no longer part of this branch, and will be unstaged. This makes it so all your changes are just now uncommitted work on that branch.  You checkout a new branch, add the files back to staging and then commit them to your new branch.
 
-#### If your changes are committed and pushed
+#### Update
+A [reader asked](https://github.com/toddself/git-undo.com/issues/2) if you can do this without having to restage the commits and re-write a commit message.  
+
+This can be done by making a new branch off your current one, and then resetting the head of the current one back to where you wanted it:
+
+1. `git checkout -b my-new-branch`
+1. `git checkout -`<span id="3-source"><sup>[3](#dash-what)</sup></span>
+1. `git reset --hard [commit hash]`
+
+I'm not a huge fan of this since it presents some additional pitfalls that you might stumble on.  `reset --hard` causes the commits to disappear from your current branch.  If you do something wrong or clumbsy, it's possible to remove the commits entirely, and then you might have to retrieve them from the reflog (but that's for another time).
+
+### If your changes are committed and pushed
 Sorry, bub. You really shouldn't ever edit remote repository history on shared branches, as this will cause everyone to have a very sad day. You're just going to have to take your lumps on this one. 
 
 Why?
