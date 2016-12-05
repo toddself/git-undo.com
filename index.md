@@ -77,7 +77,7 @@ git checkout [branchname]
 ### If your changes are committed, but not pushed<span id="2-source"></span>
 1. Checkout the branch you committed to by mistake
 2. Using git log find the commit before all the stuff you added, and copy it's hash.
-3. `git reset [commit hash]`<sup>[2](#hash-and-head^)</sup>
+3. `git reset [commit hash]`<sup>[2](#2)</sup>
 4. `git checkout -b [new branch name]`
 5. `git add . && git commit`
  
@@ -89,7 +89,7 @@ A [reader asked](https://github.com/toddself/git-undo.com/issues/2) if you can d
 This can be done by making a new branch off your current one, and then resetting the head of the current one back to where you wanted it:
 
 1. `git checkout -b my-new-branch`
-1. `git checkout -`<span id="3-source"><sup>[3](#dash-what)</sup></span>
+1. `git checkout -`<span id="3-source"><sup>[3](#3)</sup></span>
 1. `git reset --hard [commit hash]`
 
 I'm not a huge fan of this since it presents some additional pitfalls that you might stumble on.  `reset --hard` causes the commits to disappear from your current branch.  If you do something wrong or clumbsy, it's possible to remove the commits entirely, and then you might have to retrieve them from the reflog (but that's for another time).
@@ -126,3 +126,11 @@ Those are all short-hand for specific commits.  `HEAD~[some number]` means [some
 In the example above, `HEAD~1` is the commit with the hash `ff092aa`.  `HEAD~2` is `452a55a`.  `HEAD^` is an even lazier way to type `HEAD~1`.  `HEAD^^` is `HEAD~2`.
 
 [🔙](#2-source)
+
+#### 3
+_What the shit is `git checkout -`?_
+
+`git checkout -` works the same as `cd -` does in unix-y places -- it returns you to where you last where!
+If I'm on `master` and I do `git checkout -b my-new-branch` and then `git checkout -`, it'll bring you right back to master.
+
+[🔙](#3-source)
